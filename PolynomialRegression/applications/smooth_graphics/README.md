@@ -47,13 +47,11 @@ onde:
 
 Os coeficientes $a$, $b$ e $c$ são obtidos por meio do **gradiente descendente**, um método iterativo que ajusta os parâmetros na direção de menor erro:
 
-$$
-\begin{aligned}
-a &:= a - \alpha \frac{\partial J}{\partial a},\\[2mm]
-b &:= b - \alpha \frac{\partial J}{\partial b},\\[2mm]
-c &:= c - \alpha \frac{\partial J}{\partial c},
-\end{aligned}
-$$
+$$ \begin{aligned} 
+a &:= a - \alpha \frac{\partial J}{\partial a},\\[4pt] 
+b &:= b - \alpha \frac{\partial J}{\partial b},\\[4pt]
+c &:= c - \alpha \frac{\partial J}{\partial c},\\[4pt]
+\end{aligned}$$
 
 onde $\alpha$ é a **taxa de aprendizado**.
 
