@@ -72,7 +72,11 @@ for algoritmo, valor_algoritmo in dados.items():
 colors = {
     "bubble": "blue",
     "selection": "red",
-    "insertion": "green"
+    "insertion": "green",
+    "merge": "yellow",
+    "quick": "orange",
+    "shell": "purple",
+    "heap": "pink"
 }
 
 # Plotando cada algoritmo no grafico

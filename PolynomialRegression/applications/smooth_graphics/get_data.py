@@ -6,7 +6,9 @@ def getData(algorithm) -> dict:
         dados = {}
         for i in range(3):
             soma = 0
-            arquivo_json = Path.home() / "programacao" / "python" / "machine_learning" / "PolynomialRegression" / "data_base" / algorithm / f"{algorithm}_{tam[i]}.json"
+            arquivo_json = Path(__file__).parent / "data_base" / algorithm / f"{algorithm}_{tam[i]}.json"
+            
+            print(arquivo_json)
             
             with open(arquivo_json, "r", encoding="utf-8") as f:
                 data = json.load(f)
