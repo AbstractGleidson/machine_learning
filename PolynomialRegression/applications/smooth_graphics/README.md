@@ -23,29 +23,39 @@ O projeto faz uso de algumas ferramentas e bibliotecas fundamentais para **cálc
 - [**Python**](https://www.python.org/): Linguagem principal que integra todos os componentes do projeto: coleta de dados, chamada da biblioteca C++ e geração de gráficos.  
 
 
-# Regresão 
+# Regressão Polinomial
+
 A **regressão polinomial de grau 2** busca ajustar uma função da forma:
 
 $$
 f(x) = a x^2 + b x + c
 $$
 
-de modo que o **erro quadrático médio** entre os pontos reais $(x_i, y_i)$ e os valores previstos $f(x_i)$ seja minimizado.
+de modo que o **erro** entre os pontos reais $(x_i, y_i)$ e os valores previstos $f(x_i)$ seja minimizado.
 
-No projeto, os coeficientes $a$, $b$ e $c$ são obtidos por meio do **gradiente descendente**, um método iterativo que ajusta os parâmetros na direção de menor erro:
+A **função de custo** utilizada é o somatório do erro ao quadrado:
 
 $$
-\begin{aligned}
-a &:= a - \alpha \frac{\partial J}{\partial a},\\[4pt]
-b &:= b - \alpha \frac{\partial J}{\partial b},\\[4pt]
-c &:= c - \alpha \frac{\partial J}{\partial c},
-\end{aligned}
+J(a, b, c) = \sum_{i=1}^{n} \big(y_i - f(x_i)\big)^2
 $$
 
 onde:
 
-- $J(a, b, c)$ é a **função de custo** (erro médio quadrático);
-- $\alpha$ é a **taxa de aprendizado**.
+- $n$ é o número de pontos de dados;
+- $(x_i, y_i)$ são os pontos reais;
+- $f(x_i) = a x_i^2 + b x_i + c$ é o valor previsto pela regressão.
+
+Os coeficientes $a$, $b$ e $c$ são obtidos por meio do **gradiente descendente**, um método iterativo que ajusta os parâmetros na direção de menor erro:
+
+$$
+\begin{aligned}
+a &:= a - \alpha \frac{\partial J}{\partial a},\\[2mm]
+b &:= b - \alpha \frac{\partial J}{\partial b},\\[2mm]
+c &:= c - \alpha \frac{\partial J}{\partial c},
+\end{aligned}
+$$
+
+onde $\alpha$ é a **taxa de aprendizado**.
 
 # Implementação
 Para aumentar a performance do cálculo da regressão quadrática, a parte de cálculo do gradiente e da função quadrática foi implementada em C++.
