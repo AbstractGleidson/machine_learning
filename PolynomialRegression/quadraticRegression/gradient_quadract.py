@@ -1,6 +1,7 @@
 from quadraticFuction import quadraticFunction
+import numpy
 
-def gradient_quadratic(x, y, a=0, b=0, c=0, learn=1e-3, steps=1000):
+def gradient_quadratic(a, b, c, x_values, y_values, learn=1e-3, steps=10000):
     """
     Args:
         x (array of numbers): array of numbers for axis x
@@ -14,25 +15,19 @@ def gradient_quadratic(x, y, a=0, b=0, c=0, learn=1e-3, steps=1000):
     Returns:
         a, b, c: adjusted coefficients
     """
-    
-    m = x.shape[0] # number of elements
-    
+    x_values = numpy.array(x_values)
+    y_values = numpy.array(y_values)
+    m = x_values.shape[0]
+
     for i in range(steps):
         
         # calculates all y points for current coefficients values
-        f_abc = quadraticFunction(x, a, b, c)
-        
-        grad_a = 0 # Gradient sum for the coefficient a
-        grad_b = 0 # Gradient sum for the coefficient b
-        grad_c = 0 # Gradient sum for the coefficient c
-        
-        for j in range(m):
-            # erro calculation
-            error = f_abc[j] - y[j]
-            
-            grad_a += error * (x[j]**2) # increasing the gradient a
-            grad_b += error * x[j] # increasing the gradient b
-            grad_c += error # increasing the gradient c
+        f_abc = quadraticFunction(a, b, c, x_values)
+        error = f_abc - y_values
+    
+        grad_a = numpy.dot(error, (x_values ** 2)) # Gradient sum for the coefficient a
+        grad_b = numpy.dot(error, x_values) # Gradient sum for the coefficient b
+        grad_c = numpy.sum(error) # Gradient sum for the coefficient 
         
         # updata parable coefficients
         a -= (learn / m) * grad_a # gradient avarege for a

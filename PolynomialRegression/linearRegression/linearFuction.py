@@ -1,22 +1,17 @@
 import numpy
 
-def linearFunction(x, a = 0, b = 0):
+def linearFunction(a, b, x_values):
     """
     Args:
         a (number): angular coefficient of the line
         b (number): linear coefficient of the line
-        values (array of numbers): values on the x-axis
+        x_values (numpy array): values on the x-axis
 
     Returns:
-        predicts (array numbers):  values on the y-axis
+        f_ab (numpy array):  values on the y-axis
     """
     
-    m = x.shape[0] # number of elements x
-    predicts = [0] * m  # array of predicts values on the y-axis
+    x_values = numpy.array(x_values)
     
-    for i in range(m):
-        y = (a * x[i]) + b # equation of the line 
-        
-        predicts[i] = y
-    
-    return numpy.array(predicts)
+    f_ab = (a * x_values) + b   # array of predicts values on the y-axis
+    return f_ab

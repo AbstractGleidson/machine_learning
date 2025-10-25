@@ -1,6 +1,7 @@
 from quadraticFuction import quadraticFunction
+import numpy
 
-def costFuction(x, y, a, b, c):
+def costFuction(a, b, c, x_values, y_values):
     """
     Args:
         x (array of numbers): arrays of numbers for axis x
@@ -13,16 +14,9 @@ def costFuction(x, y, a, b, c):
         number: Sum of cost
     """
     
-    m = x.shape[0] # number of elements
+    x_values = numpy.array(x_values)
     # calculates all y points for cofficients values
-    f_ab = quadraticFunction(x, a, b, c) 
-    
-    cost_sum = 0
-    
-    # Sum cost
-    for i in range(m):
-        cost_sum = (f_ab[i] - y[i]) ** 2 
-        
-    cost_sum = (cost_sum / m) # avarege of cost
+    f_abc = quadraticFunction(a, b, c, x_values) 
+    cost_sum = numpy.mean((f_abc - y_values) ** 2)
     
     return cost_sum # cost 

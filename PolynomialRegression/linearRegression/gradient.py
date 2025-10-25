@@ -1,6 +1,7 @@
 from linearFuction import linearFunction
+import numpy
 
-def gradient(x, y, a=0, b=0, learn=1.0e-3, steps=1000):
+def gradient(x_values, y_values, a=0, b=0, learn=1.0e-3, steps=1000):
     """
 
     Args:
@@ -14,21 +15,18 @@ def gradient(x, y, a=0, b=0, learn=1.0e-3, steps=1000):
     Returns:
         a, b: adjusted coefficients
     """
-    m = x.shape[0] # number of elements
+    y_values = numpy.array(y_values, dtype=float)
+    x_values = numpy.array(x_values, dtype=float)
+    
+    m = x_values.shape[0] # number of elements
     
     for i in range(steps):
         # calculates all y points for current coefficient values
-        f_ab = linearFunction(x, a, b) 
-         
-        grad_a = 0 # Gradient sum for the coefficient a
-        grad_b = 0 # Gradient sum for the coefficient b
+        f_ab = linearFunction(a, b, x_values) 
         
-        for j in range(m):
-            # erro calculation
-            error = f_ab[j] - y[j]
-            
-            grad_a += error * x[j] # increasing the gradient a
-            grad_b += error # increasing the gradient b
+        error = f_ab - y_values
+        grad_a = numpy.dot(error, x_values) # Gradient sum for the coefficient a
+        grad_b = numpy.sum(error) # Gradient sum for the coefficient b
         
         # update parable coefficients
         a -= (learn / m) * grad_a # gradient avarege for a 

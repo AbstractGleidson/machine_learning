@@ -1,28 +1,23 @@
 from linearFuction import linearFunction
+import numpy
 
-def costFuction(x, y, a, b):
+def costFuction(a, b, x_values, y_values):
     """_
 
     Args:
-        x (array of numbers): arrays of numbers for axis x
-        y (array of numbers): arrays of numbers for axis y
         a (number): coefficient a 
         b (number): coefficient b
+        x (numpy array): arrays of numbers for axis x
+        y (numpy array): arrays of numbers for axis y
 
     Returns:
-        number: Sum of cost
+        cost: Sum of cost
     """
     
-    m = x.shape[0] # number of elements
-    # calculates all y points for cofficients values
-    f_ab = linearFunction(x, a, b) 
+    x_values = numpy.array(x_values)
+    y_values = numpy.array(y_values)
     
-    cost_sum = 0
+    f_ab = linearFunction(a, b, x_values) 
+    cost = numpy.mean((f_ab - y_values) ** 2) # Sum of Squared Error
     
-    # Sum cost
-    for i in range(m):
-        cost_sum = (f_ab[i] - y[i]) ** 2 
-        
-    cost_sum = (cost_sum / m) # avarege of cost
-    
-    return cost_sum # cost 
+    return cost 
